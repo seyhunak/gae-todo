@@ -1,0 +1,58 @@
+{% load i18n %}{% load googletags %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+    dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}"
+    xml:lang="{% firstof LANGUAGE_CODE 'en' %}"
+    lang="{% firstof LANGUAGE_CODE 'en' %}">
+<head> 
+    <title>{% block title %}{% endblock %} - Notalma - {% trans "Taking Sticky notes easy" %}</title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta name="keywords" content="{% block keywords %}{% endblock %}" />
+    <meta name="description" content="{% block description %}{% endblock %}" />
+    <meta name="robots" content="index,follow" />
+    <meta name="author" content="S.AKYUREK"/>
+    <meta name="google-site-verification" content="kMBVA6pgJENSR-12Vcanpb2wbh_OkaJAYn321wr1g7E" />
+    <link rel="shortcut icon" href="{{ MEDIA_URL }}global/favicon.ico" type="image/x-icon" />
+    {% block css %}
+      <link rel="stylesheet" type="text/css"  media="screen, projection" href="{{ MEDIA_URL }}combined-{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}.css" />
+      <link rel="stylesheet" type="text/css"  media="print" href="{{ MEDIA_URL }}combined-print-{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}.css" />
+      <!--[if IE]>
+        <link rel="stylesheet" type="text/css" media="screen, projection" href="{{ MEDIA_URL }}global/ie.css">
+      <![endif]-->
+    {% endblock %}
+    {% block js %}
+      <script type="text/javascript" src="{{ MEDIA_URL }}combined-{{ LANGUAGE_CODE }}.js"></script>         
+    <!--[if lt IE 7]>
+        <script type="text/javascript" src="{{ MEDIA_URL }}global/unitpngfix.js"></script>
+    <![endif]-->
+    {% endblock %}
+    {% block extra-head %}{% endblock %} 
+
+</head>
+<body>
+<div class="corner">
+  <img src="{{ MEDIA_URL }}global/badge.png" alt="Beta" />
+</div>
+<div id="container" class="container">
+	<div class="span-24 last header">
+        <a href="/"><img border="0" src="{{ MEDIA_URL }}global/logo.png" alt="Logo" /></a>	
+	</div>
+
+	<div class="span-24 content">    
+
+      {% block content-header %}
+        {% if error %}<div class="error">{{ error }}</div>{% endif %}
+        {% if info %}<div class="info">{{ info }}</div>{% endif %}
+        {% if messages %}
+          {% for message in messages %}
+              <p class="success">{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+      {% endblock %}
+      {% block content %}
+      {% endblock %}	
+	</div>
+
+</body>
+</html>

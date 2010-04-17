@@ -1,0 +1,131 @@
+{% load i18n %}{% load googletags %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+    dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}"
+    xml:lang="{% firstof LANGUAGE_CODE 'en' %}"
+    lang="{% firstof LANGUAGE_CODE 'en' %}">
+<head> 
+    <title>{% block title %}{% endblock %} - Notalma - {% trans "Taking Sticky notes easy"%}</title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta name="keywords" content="{% block keywords %}{% endblock %}" />
+    <meta name="description" content="{% block description %}{% endblock %}" />
+    <meta name="robots" content="index,follow" />
+    <meta name="author" content="S.AKYUREK"/>
+    <meta name="google-site-verification" content="kMBVA6pgJENSR-12Vcanpb2wbh_OkaJAYn321wr1g7E" />
+    <link rel="shortcut icon" href="{{ MEDIA_URL }}global/favicon.ico" type="image/x-icon" />
+    {% block css %}
+      <link rel="stylesheet" type="text/css"  media="screen, projection" href="{{ MEDIA_URL }}combined-{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}.css" />
+      <link rel="stylesheet" type="text/css"  media="print" href="{{ MEDIA_URL }}combined-print-{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}.css" />
+      <!--[if IE]>
+        <link rel="stylesheet" type="text/css" media="screen, projection" href="{{ MEDIA_URL }}global/ie.css">
+      <![endif]-->
+    {% endblock %}
+    {% block js %}  
+    <script type="text/javascript" src="{{ MEDIA_URL }}combined-{{ LANGUAGE_CODE }}.js"></script>         
+    <!--[if lt IE 7]>
+        <script type="text/javascript" src="{{ MEDIA_URL }}global/unitpngfix.js"></script>
+    <![endif]-->
+    {% endblock %}
+    {% block extra-head %}{% endblock %} 
+
+</head>
+<body>
+<div class="corner">
+  <img src="{{ MEDIA_URL }}global/badge.png" alt="Beta" />
+</div>
+<div id="container" class="container">
+	<div class="span-24 header">
+        <a href="/"><img border="0" src="{{ MEDIA_URL }}global/logo.png" alt="Logo" /></a>		
+	</div>
+
+	<div class="span-24 content">
+      {% for msg in flash %}
+        <div id="{{ msg.type }}">{{ msg.msg }}</div>
+      {% endfor %}
+
+      {% block content-header %}
+        {% if error %}<div class="error">{{ error }}</div>{% endif %}
+        {% if info %}<div class="info">{{ info }}</div>{% endif %}
+        {% if messages %}
+          {% for message in messages %}
+              <p class="success">{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+      {% endblock %}
+      {% block content %}{% endblock %}	
+      
+      <div class="box">
+       {% if google_user %}
+             <div style="display:block">	
+            {% load gravatar %}
+            {% gravatar user.email 50 %}		
+	            <h3>{% trans "Your Account" %}</h3>	
+                <strong>{% trans "Welcome" %}, {{ user.username }}!</strong>	
+                <strong>{% trans "You can start adding your notes" %}</strong>	
+	            <p>
+		            <strong>
+                      {% if current_user.is_superuser %}
+                       <a href="/admin/">{% trans "Admin Interface" %}</a>    
+                      {% endif %}    
+                     </strong>
+	            </p>		
+            </div>           
+            <a href="{% url todo.views.list_todo %}">{% trans "Your Notes" %}</a> {% trans "or" %}
+            <a href="{% google_logout_url %}">Logout</a>  
+          {% else %}
+          <center>
+           <a href="{% google_login_url request.get_full_path %}">{% trans "Login with Google Account" %}
+           </a> {% trans "or" %}
+          <a target="_blank" href="https://www.google.com/accounts/">{% trans "No Google Account? Get Here" %}
+           </a>
+           </center>         
+         {% endif %}
+         </div>
+	</div>
+    
+
+   <div class="span-24 last footer">    
+        <p>Notalma - {% trans "Taking Sticky notes easy" %}</p>           
+        <a href="http://twitter.com/seyhunak">{% trans "Follow me on Twitter" %}</a>   
+        <a href="http://djangoproject.org">{% trans "Built using Django framework" %}</a>    
+        <a href="http://code.google.com/appengine">{% trans "Powered by Google App Engine" %}</a> 
+        <form action="/i18n/setlang/" method="post">
+        <input name="next" type="hidden" value="/" />
+        <select name="language">
+        {% for lang in LANGUAGES %}
+        <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+        {% endfor %}
+        </select>
+        <input type="submit" value="Go" />
+        </form>   
+    </div>
+    </div>
+
+ <script type="text/javascript">
+    var uservoiceOptions = {
+      /* required */
+      key: 'xxxxxxxxxxx',
+      host: 'xxxxxxxxx.uservoice.com', 
+      forum: '38776',
+      showTab: true,  
+      /* optional */
+      alignment: 'right',
+      background_color:'#eee', 
+      text_color: 'black',
+      hover_color: '#ccc',
+      lang: 'en'
+    };
+
+    function _loadUserVoice() {
+      var s = document.createElement('script');
+      s.setAttribute('type', 'text/javascript');
+      s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+    _loadSuper = window.onload;
+    window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+{% extends 'ui.html' %}
+{% load i18n %}{% load gravatar %}{% load googletags %}
+{% block title %}{% trans "Todo listing" %}{% endblock %}
+{% block keywords %}{% trans "Todo listing" %}{% endblock %}
+{% block description %}{% trans "Todo listing" %}{% endblock %}
+
+{% block content %}
+{% gravatar current_user.email 90 %} {% trans "Logged as"%} {{ current_user.username }}. 
+<a id="addButton" class="add" href="/todo/add/"><span>{% trans "add todo"%}</span></a>
+<a href="{% google_logout_url %}">{% trans "logout"%}?</a>
+{%ifnotequal paginator.num_pages 1 %}
+<ul id="pagination">      
+ {% if todos %}
+<li class="previous">
+ <a href="{{ request.path }}?page={{ todos.previous_page_number }}"><< {% trans "previous todo"%}</a>
+</li>
+ {% endif %}
+ {% if todos.has_next %}
+<li class="next"><a href="{{ request.path }}?page={{ todos.next_page_number }}">{% trans "next"%} >></a></li>
+{% endif %}		
+ {% trans "todo" %} {{ todos.number }} - {{ todos.paginator.num_pages }} - {% trans "total" %} 10 {% trans "todo" %}
+ {% trans "per sheet" %}
+</ul>
+{% endifnotequal %}
+
+<h1>{% trans "Need to keep to-do? Just click Add button to the left" %}</h1>
+<h2><a href="#" class="toggle">{% trans "Need help?" %}</a></h2>
+<div id="main">
+<div class="toggled" style="display: none">
+  {% include "todo/todo_help.html" %}
+</div>
+
+{% if todos %}
+{% for todo in todos.object_list %}	
+<div class="note {{ todo.color }}" style="left:{{ todo.x }}px;top:{{ todo.y }}px;z-index:{{ todo.z }}"> 
+<b id="{{ todo.key.id }}" class="mouseover" style="display: inline">{{ todo.text }}</b>
+<div class="author">{% gravatar todo.user.email 25 %} {% trans "by"%} {{ todo.user.username }}
+<abbr class="timeago" title="{{ todo.created_at }}">{{ todo.created_at|date:"N j, Y" }} </abbr>
+<a class="button" href="{% url todo.views.delete_todo key=todo.key %}">{% trans "delete" %}</a>
+</div>
+<span class="data">{{ todo.key.id }}</span>
+</div>
+{% endfor %}			
+{% endif %}	    
+</div>     
+{% endblock %}
+
+{% block sidebar %}{% endblock %}	

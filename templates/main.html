@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Welcome"%}{% endblock %}
+{% block keywords %}Notalma - {% trans "Taking Sticky notes easy" %}, sticky note application, stick notes, todo, task{% endblock %}
+{% block description %}Notalma - {% trans "Taking Sticky notes easy" %}, sticky note application, stick notes, todo, task{% endblock %}
+
+{% block content %}
+<h1>{% trans "Notalma is simple sticky note application, you can keep your tasks, todos, quick notes."%}
+{% trans "It's easy to start. Just login with your Google account. And start posting."%}</h1>
+<center>
+<img border="0" src="{{ MEDIA_URL }}global/intro.png" alt="Intro" />
+<img border="0" src="{{ MEDIA_URL }}global/intro2.png" alt="Intro" />
+</center>
+<h1>{% trans "Just add todo content, select color and add."%}
+{% trans "Login and get started today."%}</h1>
+
+{% endblock %}
+{% block sidebar %}{% endblock %}	

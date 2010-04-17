@@ -1,0 +1,36 @@
+###
+GAE Todo (Notalma)
+A very simple sticky todolist application built using Django/Appengine/JQuery with administration
+Inspired from: AJAX-enabled Sticky Notes With PHP & jQuery tutorial on tutorialzine.com
+Demo : http://notalma.appspot.com/
+###
+
+
+-- Installing --
+1. Checkout from Github repository (gae-todo)
+2. Download Google App Engine SDK
+3. Create a symbolic link from Google App Engine SDK folder to /gae-todo/common folder.
+4. Go to gae-todo folder and run "python manage.py runserver
+5. Optional (run "python manage.py syncdb to create super user")
+6. Optional (to reach administration panel go to "/admin" then enter your creditentials)
+
+-- Using --
+1. Login using your Google account (hybrid account feature disabled)
+2. Click "Your Notes" link or go to "/todo"
+3. Click add todo button, just add todo content, select color and click Add button.
+4. Notes will be created.
+
+You can drag and drop notes, you can edit inplace notes content, or can delete anytime.
+
+
+-- Changelog --
+
+-- 1.0 --
+* Released v.1.0
+* Added i18n support
+* Fixed some minor bugs
+
+
+-- For Feedback &  Report Bugs
+Use github. @seyhunak
+http://www.seyhunakyurek.com

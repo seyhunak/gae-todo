@@ -1,0 +1,29 @@
+<!-- Define the div tag where the gadget will be inserted. -->
+<div id="div-1795976969227045940" style="width:225px;border:1px solid #ffffff;"></div>
+<!-- Render the gadget into a div. -->
+<script type="text/javascript">
+var skin = {};
+skin['FONT_FAMILY'] = 'verdana,sans-serif';
+skin['BORDER_COLOR'] = '#ffffff';
+skin['ENDCAP_BG_COLOR'] = '#f8f8f8';
+skin['ENDCAP_TEXT_COLOR'] = '#333333';
+skin['ENDCAP_LINK_COLOR'] = '#666666';
+skin['ALTERNATE_BG_COLOR'] = '#ffffff';
+skin['CONTENT_BG_COLOR'] = '#ffffff';
+skin['CONTENT_LINK_COLOR'] = '#333333';
+skin['CONTENT_TEXT_COLOR'] = '#333333';
+skin['CONTENT_SECONDARY_LINK_COLOR'] = '#666666';
+skin['CONTENT_SECONDARY_TEXT_COLOR'] = '#666666';
+skin['CONTENT_HEADLINE_COLOR'] = '#333333';
+skin['HEADER_TEXT'] = 'Recommended';
+skin['RECOMMENDATIONS_PER_PAGE'] = '5';
+google.friendconnect.container.setParentUrl('/' /* location of rpc_relay.html and canvas.html */);
+google.friendconnect.container.renderOpenSocialGadget(
+ { id: 'div-1795976969227045940',
+   url:'http://www.google.com/friendconnect/gadgets/recommended_pages.xml',
+   site: '09567990162774406079',
+   'view-params':{"docId":"recommendedPages"}
+ },
+  skin);
+</script>
+

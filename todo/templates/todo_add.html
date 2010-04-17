@@ -1,0 +1,21 @@
+{% load i18n %}
+<h3 class="popupTitle">{% trans "Add a new todo" %}</h3>
+<div id="previewNote" class="note yellow" style="left:0;top:65px;z-index:1">
+	<div class="body"></div>
+	<div class="author"></div>
+	<span class="data"></span>
+</div>
+
+<div id="noteData">
+    <form action="/todo/post/" method="post" class="note-form">
+    <label for="note-body">{% trans "Text of the note" %}</label>
+    <textarea name="note-body" id="note-body" class="pr-body" cols="30" rows="6"></textarea>
+    <label for="note-name">{% trans "Your name" %}</label>
+    <input type="text" name="note-name" id="note-name" class="pr-author" value="" />
+    <label>{% trans "Color" %}</label>
+    <div class="color yellow"></div>
+    <div class="color blue"></div>
+    <div class="color green"></div>
+    <a id="note-submit" class="msgadd add" href=""><span>{% trans "add todo"%}</span></a>
+    </form>
+</div>

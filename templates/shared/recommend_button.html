@@ -1,0 +1,20 @@
+<!-- Define the div tag where the gadget will be inserted. -->
+<div id="div-3321345113281357234" style="width:100%;"></div>
+<!-- Render the gadget into a div. -->
+<script type="text/javascript">
+var skin = {};
+skin['HEIGHT'] = '21';
+skin['BUTTON_STYLE'] = 'compact';
+skin['BUTTON_TEXT'] = 'Recommend!';
+skin['BUTTON_ICON'] = 'default';
+google.friendconnect.container.setParentUrl('/' /* location of rpc_relay.html and canvas.html */);
+google.friendconnect.container.renderOpenSocialGadget(
+ { id: 'div-3321345113281357234',
+   url:'http://www.google.com/friendconnect/gadgets/recommended_pages.xml',
+   height: 21,
+   site: '09567990162774406079',
+   'view-params':{"pageUrl":location.href,"pageTitle":(document.title ? document.title : location.href),"docId":"recommendedPages"}
+ },
+  skin);
+</script>
+
